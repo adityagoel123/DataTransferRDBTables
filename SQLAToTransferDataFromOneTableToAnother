@@ -1,0 +1,23 @@
+INSERT INTO TABLE_1(
+	cust_unq_id, action, customer_type,
+	dateofbirth, insert_time, name, primary_personality,
+	psx_batch_id, record_type, yob, description1,
+	description2, description3, suffix
+)
+SELECT
+cust_unq_id,
+action,
+customer_type,
+To_date(dateofbirth, 'DD-MON-RR') AS dateofbirth,
+insert_time,
+name,
+primary_personality,
+psx_batch_id,
+record_type,
+yob,
+description1,
+description2,
+description3,
+suffix
+FROM (SELECT d.*, ROWNUM r FROM TABLE_2 d)
+WHER r >= 1 AND r <= 1000000;
